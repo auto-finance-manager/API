@@ -4,6 +4,5 @@ from share.api.serializers import ShareSerializer
 
 
 class AllSharesView(ListAPIView):
-    queryset = ShareModel.objects.all()
+    queryset = ShareModel.objects
     serializer_class = ShareSerializer
-

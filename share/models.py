@@ -6,7 +6,8 @@ class ShareModel(models.Model):
     title = models.CharField(max_length=250)
     graphic = models.CharField(max_length=250)
     # offer_price = models.DecimalField(max_digits=10, decimal_places=2)
-    current_price = models.DecimalField(max_digits=10, decimal_places=2)
+    # current_price = models.DecimalField(max_digits=10, decimal_places=2)
+    current_price = models.CharField(max_length=50)
     last_updated = models.CharField(max_length=10, null=True)
     # post_offer_return = models.FloatField()
 
