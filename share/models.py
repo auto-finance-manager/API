@@ -22,6 +22,9 @@ class ShareOwnershipModel(models.Model):
     # sold = models.BooleanField(default=False)
     tracking = models.BooleanField(default=True)
 
+    def get_slots(self) -> list:
+        return self.slots
+
 
 class SlotModel(models.Model):
     class ProgresType(models.TextChoices):
@@ -42,3 +45,10 @@ class SlotModel(models.Model):
     def is_buy(self):
         return self.progres_type == self.ProgresType.BUY
 
+
+class PublicOfferingModel(models.Model):
+    title = models.CharField(max_length=150, blank=True, null=True)
+    details = models.JSONField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
