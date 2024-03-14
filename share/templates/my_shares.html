@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for share in my_shares %}
+<div class="row border-end">
+    <div class="col-1">
+        <img class="ratio ratio-1x1 share-logo" src="{{share.share.logo}}" alt="{{share.share.title}}" style="object-fit: cover">
+    </div>
+    <div class="col-1 my-auto ms-0">
+        <p class="my-auto ms-0">{{ share.share.code }}</p>
+    </div>
+    <div class="col my-auto ms-0">
+        <p class="my-auto ms-0">{{ share.share.title }}</p>
+    </div>
+    <div class="col-1 my-auto ms-0">
+        <p class="my-auto ms-0">₺{{ share.share.current_price }}</p>
+    </div>
+    <div class="col-1 my-auto ms-0" onclick="toggle_slots({{share.id}})">
+        <p class="my-auto ms-0 position-relative">
+            <span>
+                {{ share.get_general_status.remaining_lots }}
+            </span>
+            <span class="position-absolute text-info" style="font-size: 10px">
+                <i class="fa-solid fa-expand" style="font-size: 6px"></i>
+            </span>
+        </p>
+    </div>
+    <div class="col-1 my-auto ms-0">
+        {% if share.get_general_status.remaining_lots > 0 %}
+            <p class="my-auto ms-0 text-success ">₺{{ share.get_general_status.total_profit  }}</p>
+        {% else %}
+            <p class="my-auto ms-0">₺{{ share.get_general_status.total_profit }}</p>
+        {% endif %}
+    </div>
+   <div class="col-1 d-flex" >
+      <img class="ratio ratio-1x1 share-logo my-auto" src="{{share.share.graphic}}" alt="{{share.share.title}}" style="object-fit: contain">
+    </div>
+    <div class="col-1 d-flex">
+        <p class="my-auto">
+        {{ share.share.last_updated }}
+        </p>
+    </div>
+     <div class="col-1 my-auto ms-0 ">
+      <span>
+        <i class="fa-solid fa-pen-to-square"></i>
+      </span>
+    </div>
+    <div class="col-1 my-auto ms-0 ">
+      <span>
+        <i class="fa-solid fa-x"></i>
+      </span>
+    </div>
+</div>
+
+<div class="row" id="slot_{{share.id}}" style="display:none">
+<div class="row">
+  <div class="col-1">#</div>
+  <div class="col-1">Quantity</div>
+  <div class="col-1">Buy/Sale</div>
+  <div class="col-1">Status</div>
+  <div class="col-3">action date</div>
+</div>
+{% for slot in share.get_slots.all %}
+    <div class="row">
+      <div class="col-1">{{ forloop.counter0 }}</div>
+      <div class="col-1">{{ slot.quantity }}</div>
+      <div class="col-1">{{ slot.progres_type|upper }}</div>
+      <div class="col-1 text-success" v-if="is_sale_cooldown(slot.action_time, slot.progres_type)">cash</div>
+      <div class="col-1" v-else>freeze</div>
+      <div class="col-3">{{ slot.action_time }}</div>
+    </div>
+{% endfor %}
+
+</div>
+{% endfor %}
+
+{% endblock%}
+
+{% block scripts %}
+<script>
+    function toggle_slots(slot_id) {
+        const slot = document.getElementById(`slot_${slot_id}`)
+        if (slot.getAttribute('style') === 'display:none'){
+            slot.setAttribute('style' , 'display:block')
+        } else {
+            slot.setAttribute('style' , 'display:none')
+        }
+    }
+</script>
+{% endblock%}
+

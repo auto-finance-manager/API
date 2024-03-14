@@ -22,6 +22,7 @@ from config.settings.base import env
 
 urlpatterns = [
     path('admin/' if settings.DEBUG else env('PRODUCT_ADMIN_PATH'), admin.site.urls),
-    path('api/', include('api.urls'))
+    path('api/', include('api.urls')),
+    path('', include('share.urls'))
 ]
 

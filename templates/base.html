@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Madimi+One&display=swap');
+    * {
+      font-family: "Madimi One", sans-serif;
+      font-weight: 300;
+      font-style: normal;
+    }
+    .share-logo{
+      width: 36px!important;
+      height: 36px!important;
+      object-fit: cover;
+    }
+    </style>
+
+</head>
+<body>
+<header class="w-100 fw-bold py-2" data-bs-theme="dark">
+  <section class="container d-flex justify-content-center my-auto">
+    <article class="my-auto" style="min-width: max-content">Finance Tracker</article>
+    <article class="w-100 text-center my-auto">
+      <nav class="m-auto d-flex justify-content-center">
+        <ul class="d-flex list-unstyled my-auto">
+          <li class="me-1 active">Dashboard</li>
+          <li class="me-1 mx-2">Dashboard</li>
+          <li class="me-1">Dashboard</li>
+        </ul>
+      </nav>
+    </article>
+    <article class="my-auto" style="min-width: max-content">
+      <button class="btn rounded-circle">
+          <span><i class="fa-solid fa-sun"></i></span>
+          <span><i class="fa-solid fa-moon"></i></span>
+        </button>
+      Login
+    </article>
+  </section>
+</header>
+<section class="d-flex">
+    <article class="container justfy-content-center">
+        {% block content %}
+        {% endblock %}
+    </article>
+</section>
+
+{% block scripts %}
+{% endblock%}
+
+</body>
+</html>

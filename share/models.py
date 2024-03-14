@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import timedelta, datetime
 
 
 class ShareModel(models.Model):
@@ -13,6 +14,9 @@ class ShareModel(models.Model):
     last_updated = models.CharField(max_length=10, null=True)
     # post_offer_return = models.FloatField()
 
+    def __str__(self):
+        return self.title
+
 
 class ShareOwnershipModel(models.Model):
     share = models.ForeignKey('ShareModel', on_delete=models.CASCADE)
@@ -22,6 +26,25 @@ class ShareOwnershipModel(models.Model):
     slots = models.ManyToManyField('share.SlotModel')
     # sold = models.BooleanField(default=False)
     tracking = models.BooleanField(default=True)
+
+    @property
+    def get_general_status(self):
+        remaining_lots = 0
+        total_profit = 0
+        if slots := self.slots.all():
+            for transaction in slots:
+                if transaction.progres_type == transaction.ProgresType.BUY:
+                    remaining_lots += transaction.quantity
+                else:
+                    sold_lots = transaction.quantity
+                    sale_price = float(transaction.price)
+                    profit = sold_lots * (sale_price - float(self.share.current_price))
+                    total_profit += profit
+                    remaining_lots -= sold_lots
+        return {
+            'total_profit': total_profit,
+            'remaining_lots': remaining_lots
+        }
 
     def get_slots(self) -> list:
         return self.slots
@@ -45,6 +68,18 @@ class SlotModel(models.Model):
     @property
     def is_buy(self):
         return self.progres_type == self.ProgresType.BUY
+
+    @property
+    def is_sale_cooldown(self):
+        match self.progres_type:
+            case self.ProgresType.BUY:
+                return True
+            case self.ProgresType.T_SALE:
+                return self.action_time < datetime.now()
+            case self.ProgresType.T_1_SALE:
+                return (self.action_time + timedelta(days=1)) < datetime.now()
+            case self.ProgresType.T_2_SALE:
+                return (self.action_time + timedelta(days=2)) < datetime.now()
 
 
 class PublicOfferingModel(models.Model):
