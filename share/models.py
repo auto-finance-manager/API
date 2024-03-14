@@ -9,6 +9,7 @@ class ShareModel(models.Model):
     # offer_price = models.DecimalField(max_digits=10, decimal_places=2)
     # current_price = models.DecimalField(max_digits=10, decimal_places=2)
     current_price = models.CharField(max_length=50)
+    previous_price = models.CharField(max_length=50, default='0')
     last_updated = models.CharField(max_length=10, null=True)
     # post_offer_return = models.FloatField()
 

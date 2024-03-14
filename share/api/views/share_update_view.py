@@ -7,7 +7,7 @@ class ShareUpdateView(APIView):
     @staticmethod
     def update_or_create_share(data):
         share_code = data.get('code')
-        print(f'share_code: {share_code}')
+        # burada kod tekrarının farkındayım düzelteceğim inş
         if share := ShareModel.objects.filter(code=share_code).first():
             share.graphic = data.get('graphic')
             share.title = data.get('title')

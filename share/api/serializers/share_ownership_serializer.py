@@ -30,4 +30,4 @@ class ShareOwnershipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShareOwnershipModel
-        fields = '__all__'
+        fields: str = '__all__'
