@@ -16,7 +16,13 @@ def stock_status_change_notification(sender, created, instance, **kwargs):
                 share=instance,
                 tracking=True
             ):
-                send_notification_to_owner(share_owner, changing_rate=changing_rate)
+                msg_context: dict = {
+                    'share_owner': share_owner.owner,
+                    'changing_rate': changing_rate,
+                    'general_status': share_owner.get_general_status,
+                    'share': share_owner.share
+                }
+                send_notification_to_owner(share_owner, msg_context)
             instance.previous_price = instance.current_price
             instance.save()
 
@@ -29,8 +35,8 @@ def calculate_changing_rate(old_price: float, new_price:float) -> float | int:
             return round(percentage_change, 2)
 
 
-def send_notification_to_owner(share, **kwargs):
-    html_content = render_to_string('share_status_update.html', kwargs)
+def send_notification_to_owner(share, context):
+    html_content = render_to_string('mail/share_status_update.html', context)
 
     html_text = strip_tags(html_content)
     msg = EmailMultiAlternatives('Anket Sonuç', html_text,
