@@ -90,12 +90,11 @@ class AllStockList(LoginRequiredMixin, ListView):
         return context
 
 
-class SyncNewView(View):
-    def post(self, request, *args, **kwargs):
-        print(self)
-        print(request)
-        print(request.POST)
-        print(args)
-        print(kwargs)
-        return HttpResponse(status=204)
+class NewsView(TemplateView):
+    template_name = 'news.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        with open(settings.BASE_DIR / 'news.json', 'r', encoding='utf-8') as newsf:
+            context['news'] = json.loads(newsf.read())
+        return context

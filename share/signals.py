@@ -27,7 +27,7 @@ def stock_status_change_notification(sender, created, instance, **kwargs):
             instance.save()
 
 
-def calculate_changing_rate(old_price: float, new_price:float) -> float | int:
+def calculate_changing_rate(old_price: float, new_price: float) -> float | int:
     if old_price != new_price:
         price_difference: float = new_price - old_price
         percentage_change: float = (price_difference / abs(old_price)) * 100

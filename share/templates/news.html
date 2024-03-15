@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <article>
+    {% for nw in news %}
+        {{ nw.headline }}
+        {{ nw.body | safe}}
+        <hr>
+    {% endfor %}
+    </article>
+</section>
+{% endblock %}
+
