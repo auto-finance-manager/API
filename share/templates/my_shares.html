@@ -81,6 +81,10 @@
 {% endfor %}
 
 </div>
+{% empty %}
+<div class="alert alert-info">
+    No shares added yet, to <a href="{% url 'add-share' %}">add</a>
+</div>
 {% endfor %}
 
 {% endblock%}

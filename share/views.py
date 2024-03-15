@@ -33,14 +33,16 @@ class AddShareView(LoginRequiredMixin, TemplateView):
         share_form = ShareOwnershipForm(request.POST)
         slots_form = SlotsForm(request.POST)
         if share_form.is_valid() and slots_form.is_valid():
-            code = share_form.cleaned_data.get('code')
-            if not ShareOwnershipModel.objects.filter(code=code).exists():
+            share = share_form.cleaned_data.get('share')
+            if not ShareOwnershipModel.objects.filter(share=share, owner=request.user).exists():
                 share_owner = share_form.save(commit=False)
                 slot = slots_form.save()
                 share_owner.owner = request.user
                 share_owner.save()
                 share_owner.slots.add(slot)
                 share_owner.save()
+
+            return HttpResponseRedirect(reverse('update-share', kwargs={'slug': share.code}))
 
         return self.get(request, *args, **kwargs)
 

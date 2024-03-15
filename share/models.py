@@ -15,8 +15,11 @@ class ShareModel(models.Model):
     last_updated = models.CharField(max_length=10, null=True)
     # post_offer_return = models.FloatField()
 
+    class Meta:
+        ordering: tuple = 'code',
+
     def __str__(self):
-        return self.title
+        return f'{self.code}-{self.title}'
 
 
 class ShareOwnershipModel(models.Model):
@@ -36,6 +39,8 @@ class ShareOwnershipModel(models.Model):
             for transaction in slots:
                 if transaction.progres_type == transaction.ProgresType.BUY:
                     remaining_lots += transaction.quantity
+                    # total_profit += float(transaction.price) * transaction.quantity
+                    total_profit += transaction.quantity * float(self.share.current_price)
                 else:
                     sold_lots = transaction.quantity
                     sale_price = float(transaction.price)
