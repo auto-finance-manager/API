@@ -43,7 +43,7 @@ class ShareOwnershipModel(models.Model):
                     total_profit += profit
                     remaining_lots -= sold_lots
         return {
-            'total_profit': total_profit,
+            'total_profit': f'{total_profit:.2f}',
             'remaining_lots': remaining_lots
         }
 

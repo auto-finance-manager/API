@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex">
+<div class="m-0 p-0 w-75" style="/*max-height: 80vh; overflow-y: auto*/" >
+{% for share in shares %}
+<div class="row m-0 p-0">
+    <div class="col-1">
+        <img class="ratio ratio-1x1 share-logo" src="{{share.logo}}" alt="{{share.title}}" style="object-fit: cover">
+    </div>
+        <div class="col-1 my-auto ms-0">
+        <p class="my-auto ms-0">{{ share.code }}</p>
+    </div>
+    <div class="col my-auto ms-0">
+        <p class="my-auto ms-0">{{ share.title }}</p>
+    </div>
+    <div class="col-1 my-auto ms-0">
+        <p class="my-auto ms-0">₺{{ share.current_price }}</p>
+    </div>
+    <div class="col-1 my-auto ms-0">
+        <p class="my-auto ms-0">{{ share.last_updated }}</p>
+    </div>
+</div>
+{% endfor %}
+</div>
+<div class="m-0 p-0 w-25">
+    {% for nw in news %}
+        {{ nw.headline }}
+        {{ nw.body | safe}}
+        <hr>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}
+

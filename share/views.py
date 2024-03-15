@@ -1,9 +1,13 @@
+import json
+
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.views.generic import TemplateView, FormView, DetailView
+from django.shortcuts import HttpResponse
+from django.views.generic import TemplateView, FormView, DetailView, ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ShareOwnershipForm, SlotsForm, UpdateShareOwnershipForm
-from .models import ShareOwnershipModel
+from .models import ShareOwnershipModel, ShareModel
 
 
 class MyShareView(TemplateView):
@@ -50,6 +54,7 @@ class UpdateShareView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['share_form'] = UpdateShareOwnershipForm(instance=object)
         context['slots_form'] = SlotsForm()
+        context['share'] = object.share
         context['slots'] = object.get_slots().all()
         return context
 
@@ -68,3 +73,27 @@ class UpdateShareView(LoginRequiredMixin, DetailView):
                 share_owner.save()
             return HttpResponseRedirect(reverse('update-share', kwargs={'slug': slug}))
         return self.get(request, *args, **kwargs)
+
+
+class AllStockList(LoginRequiredMixin, ListView):
+    model = ShareModel
+    queryset = ShareModel.objects.all()
+    template_name = 'all_stocks.html'
+    context_object_name = 'shares'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        with open(settings.BASE_DIR / 'news.json', 'r', encoding='utf-8') as newsf:
+            context['news'] = json.loads(newsf.read())
+        return context
+
+
+class SyncNewView(View):
+    def post(self, request, *args, **kwargs):
+        print(self)
+        print(request)
+        print(request.POST)
+        print(args)
+        print(kwargs)
+        return HttpResponse(status=204)
+

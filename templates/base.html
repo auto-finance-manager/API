@@ -25,13 +25,17 @@
 <body>
 <header class="w-100 fw-bold py-2" data-bs-theme="dark">
   <section class="container d-flex justify-content-center my-auto">
-    <article class="my-auto" style="min-width: max-content">Finance Tracker</article>
+    <article class="my-auto" style="min-width: max-content">
+        <a href="{% url 'all-shares' %}">
+            Finance Tracker
+        </a>
+    </article>
     <article class="w-100 text-center my-auto">
       <nav class="m-auto d-flex justify-content-center">
-        <ul class="d-flex list-unstyled my-auto">
-          <li class="me-1 active">Dashboard</li>
-          <li class="me-1 mx-2">Dashboard</li>
-          <li class="me-1">Dashboard</li>
+        <ul class="d-flex list-unstyled my-auto text-center">
+          <li class=""><a>My Shares</a></li>
+          <li class="me-1 mx-2"><a>News</a></li>
+          <li class="">Portföy</li>
         </ul>
       </nav>
     </article>

@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row">
+    <div class="col-6">
+        <img src="{{ share.graphic }}">
+    </div>
+    <div class="col-6">
+        <img src="{{ share.logo }}" class="m-auto" style="width: 50px; height: 50px; object-fit: cover">{{ share.title }}
+        <hr>
+        <div class="row">
+            <div class="col-1 d-flex" style="max-width: max-content">
+                ₺{{ share.current_price }}
+            </div>
+            <div class="col-1 d-flex" style="max-width: max-content">
+                <i class="fa-regular fa-clock my-auto me-1"></i>{{ share.last_updated }}
+            </div>
+        </div>
+
+
+    </div>
+</div>
 <form method="post">
     {% csrf_token %}
     {{ share_form.as_p }}
