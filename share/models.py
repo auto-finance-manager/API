@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import timedelta, datetime
+import pytz  # Import pytz module for timezone handling
 
 
 class ShareModel(models.Model):
@@ -71,15 +72,19 @@ class SlotModel(models.Model):
 
     @property
     def is_sale_cooldown(self):
+        # now = datetime.now()  # Get current datetime
+        # now = now.replace(tzinfo=None)  # Make it offset-naive
+        now = datetime.now(pytz.utc)  # Get current datetime with UTC timezone
+
         match self.progres_type:
             case self.ProgresType.BUY:
                 return True
             case self.ProgresType.T_SALE:
-                return self.action_time < datetime.now()
+                return self.action_time < now
             case self.ProgresType.T_1_SALE:
-                return (self.action_time + timedelta(days=1)) < datetime.now()
+                return (self.action_time + timedelta(days=1)) < now
             case self.ProgresType.T_2_SALE:
-                return (self.action_time + timedelta(days=2)) < datetime.now()
+                return (self.action_time + timedelta(days=2)) < now
 
 
 class PublicOfferingModel(models.Model):

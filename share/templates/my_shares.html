@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<div class="d-flex w-100">
+    <div class="w-100"></div>
+    <div class="">
+        <a href="{% url 'add-share' %}" class="btn btn-sm btn-primary">+</a>
+    </div>
+</div>
 {% for share in my_shares %}
 <div class="row border-end">
     <div class="col-1">
@@ -42,9 +47,9 @@
         </p>
     </div>
      <div class="col-1 my-auto ms-0 ">
-      <span>
+      <a href="{% url 'update-share' share.share.code %}">
         <i class="fa-solid fa-pen-to-square"></i>
-      </span>
+      </a>
     </div>
     <div class="col-1 my-auto ms-0 ">
       <span>
@@ -66,8 +71,11 @@
       <div class="col-1">{{ forloop.counter0 }}</div>
       <div class="col-1">{{ slot.quantity }}</div>
       <div class="col-1">{{ slot.progres_type|upper }}</div>
-      <div class="col-1 text-success" v-if="is_sale_cooldown(slot.action_time, slot.progres_type)">cash</div>
-      <div class="col-1" v-else>freeze</div>
+    {% if slot.is_sale_cooldown %}
+        <div class="col-1 text-success">cash</div>
+    {% else %}
+        <div class="col-1">freeze</div>
+    {% endif %}
       <div class="col-3">{{ slot.action_time }}</div>
     </div>
 {% endfor %}

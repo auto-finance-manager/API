@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ share_form.as_p }}
+    <hr>
+    <div class="row">
+  <div class="col-1">#</div>
+  <div class="col-1">Quantity</div>
+  <div class="col-1">Buy/Sale</div>
+  <div class="col-1">Status</div>
+  <div class="col-3">action date</div>
+</div>
+    {% for slot in slots %}
+        <div class="row">
+          <div class="col-1">{{ forloop.counter0 }}</div>
+          <div class="col-1">{{ slot.quantity }}</div>
+          <div class="col-1">{{ slot.progres_type|upper }}</div>
+        {% if slot.is_sale_cooldown %}
+            <div class="col-1 text-success">cash</div>
+        {% else %}
+          <div class="col-1" v-else>freeze</div>
+        {% endif %}
+
+          <div class="col-3">{{ slot.action_time }}</div>
+        </div>
+    {% endfor %}
+    <hr>
+    {{ slots_form.as_p }}
+<hr>
+    <button class="btn btn-primary">Save</button>
+</form>
+{% endblock%}
+
