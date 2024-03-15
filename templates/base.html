@@ -40,13 +40,18 @@
         </ul>
       </nav>
     </article>
-    <article class="my-auto" style="min-width: max-content">
+    <article class="my-auto d-flex" style="min-width: max-content">
       <button class="btn rounded-circle">
           <span><i class="fa-solid fa-sun"></i></span>
           <span><i class="fa-solid fa-moon"></i></span>
         </button>
       {% if request.user.is_authenticated %}
-        {{ request.user.username }}
+        <div class="d-flex">
+        <span class="my-auto">{{ request.user.username }} -</span>
+        <form method="post" action="{% url 'user_logout' %}" class="my-auto">
+        <button class="btn btn-sm btn-light" type="submit">Logout</button>
+    </form>
+        </div>
         {% else %}
         <a>Login</a>
         <a>Register</a>

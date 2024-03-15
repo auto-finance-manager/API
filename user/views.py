@@ -13,6 +13,11 @@ class LoginView(FormView):
     form_class = LoginForm
     template_name = 'login.html'
 
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('all-shares'))
+        return super(LoginView, self).get(*args, **kwargs)
+
     def get_success_url(self):
         return reverse('all-shares')
 
@@ -36,6 +41,11 @@ class RegisterView(FormView):
 
     def get_success_url(self):
         return reverse('home_page')
+
+    def get(self, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return HttpResponseRedirect(reverse('all-shares'))
+        return super(RegisterView, self).get(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         form = RegisterForm(request.POST)
