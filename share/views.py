@@ -7,7 +7,7 @@ from django.shortcuts import HttpResponse
 from django.views.generic import TemplateView, FormView, DetailView, ListView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ShareOwnershipForm, SlotsForm, UpdateShareOwnershipForm
-from .models import ShareOwnershipModel, ShareModel
+from .models import ShareOwnershipModel, ShareModel, SlotModel
 
 
 class MyShareView(TemplateView):
@@ -54,8 +54,13 @@ class UpdateShareView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, object, **kwargs):
         context = super().get_context_data(**kwargs)
+        if slot_id := self.kwargs.get('slot_id'):
+            Slot = SlotModel.objects.get(pk=slot_id)
+            context['slots_form'] = SlotsForm(instance=Slot)
+        else:
+            context['slots_form'] = SlotsForm()
+
         context['share_form'] = UpdateShareOwnershipForm(instance=object)
-        context['slots_form'] = SlotsForm()
         context['share'] = object.share
         context['slots'] = object.get_slots().all()
         return context

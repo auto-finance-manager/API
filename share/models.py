@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import timedelta, datetime
 import pytz  # Import pytz module for timezone handling
+from django.utils import timezone
 
 
 class ShareModel(models.Model):
@@ -66,7 +67,7 @@ class SlotModel(models.Model):
     progres_type = models.CharField(max_length=10, choices=ProgresType.choices, default=ProgresType.BUY)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     quantity = models.IntegerField(default=0)
-    action_time = models.DateTimeField(auto_now_add=True)
+    action_time = models.DateTimeField(default=timezone.now, editable=True)
 
     class Meta:
         ordering: tuple = 'action_time',

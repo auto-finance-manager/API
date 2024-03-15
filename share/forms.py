@@ -9,7 +9,8 @@ class SlotsForm(forms.ModelForm):
         widgets: dict = {
             'progres_type': forms.Select(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'quantity': forms.NumberInput(attrs={'class': 'form-control'})
+            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
+            'action_time': forms.DateTimeInput(attrs={'class': 'form-control'})
         }
 
 

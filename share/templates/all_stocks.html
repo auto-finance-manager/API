@@ -6,6 +6,10 @@
 {% for share in shares %}
 <div class="row m-0 p-0">
     <div class="col-1">
+    {% load static %}
+<!--    <object data="{% static 'img/default.bmp' %}" type="image/png">-->
+<!--        <img class="ratio ratio-1x1 share-logo" src="{{share.logo}}" alt="{{share.title}}" style="object-fit: cover">-->
+<!--    </object>-->
         <img class="ratio ratio-1x1 share-logo" src="{{share.logo}}" alt="{{share.title}}" style="object-fit: cover">
     </div>
         <div class="col-1 my-auto ms-0">
@@ -16,6 +20,9 @@
     </div>
     <div class="col-1 my-auto ms-0">
         <p class="my-auto ms-0">₺{{ share.current_price }}</p>
+    </div>
+    <div class="col-1 d-flex" >
+      <img class="ratio ratio-1x1 share-logo my-auto" src="{{share.graphic}}" alt="{{share.title}}" style="object-fit: contain">
     </div>
     <div class="col-1 my-auto ms-0">
         <p class="my-auto ms-0">{{ share.last_updated }}</p>
