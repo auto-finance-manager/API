@@ -39,7 +39,7 @@ def send_notification_to_owner(share, context):
     html_content = render_to_string('mail/share_status_update.html', context)
 
     html_text = strip_tags(html_content)
-    msg = EmailMultiAlternatives('Anket Sonuç', html_text,
+    msg = EmailMultiAlternatives('Share Tracker', html_text,
                                  'settings.EMAIL_HOST_USER', (share.owner.email,))
     # msg.attach(image)
 
