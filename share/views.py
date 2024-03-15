@@ -10,13 +10,15 @@ from .forms import ShareOwnershipForm, SlotsForm, UpdateShareOwnershipForm
 from .models import ShareOwnershipModel, ShareModel, SlotModel
 
 
-class MyShareView(TemplateView):
+class MyShareView(LoginRequiredMixin, TemplateView):
 
     template_name = 'my_shares.html'
 
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['my_shares'] = ShareOwnershipModel.objects.all()
+        context['my_shares'] = ShareOwnershipModel.objects.filter(owner=self.request.user)
         return context
 
 
@@ -106,8 +108,7 @@ class MineShareDeleteView(LoginRequiredMixin, RedirectView):
         return reverse('mine')
 
 
-
-class AllStockList(LoginRequiredMixin, ListView):
+class AllStockList(ListView):
     model = ShareModel
     queryset = ShareModel.objects.all()
     template_name = 'all_stocks.html'

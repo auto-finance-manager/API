@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 
+{% block title %}Login | pars{% endblock %}
+
 {% block content %}
-s
+<div class="d-flex mt--2">
+    <hr class="w-100 my-auto">
+    <strong class="mx-2 fw-bold" style="font-size: 24px">Login</strong>
+    <hr class="w-100 my-auto">
+</div>
+<form method="post">
+    {% csrf_token %}
+    <label>Username</label>
+    <input type="text" placeholder="Username" class="form-control" name="username">
+    <label>password</label>
+    <input type="password" placeholder="Password" class="form-control" name="password">
+    <hr>
+    <button class="btn btn-primary">Login</button>
+</form>
 {% endblock %}
 

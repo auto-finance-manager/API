@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput())
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField()
+    password = forms.CharField()
 
 
 class RegisterForm(UserCreationForm):
@@ -18,3 +18,4 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields: tuple = 'username', 'email', 'first_name', 'last_name', 'password1', 'password2'
+

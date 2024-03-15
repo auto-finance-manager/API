@@ -1,6 +1,30 @@
 {% extends 'base.html' %}
 
+{% block title %}Register | pars{% endblock %}
+
+
 {% block content %}
-s
+<div class="d-flex mt--2">
+    <hr class="w-100 my-auto">
+    <strong class="mx-2 fw-bold" style="font-size: 24px">Register</strong>
+    <hr class="w-100 my-auto">
+</div>
+<form method="post" class="mt-1 mt-md-5">
+    {% csrf_token %}
+    <label>Username*</label>
+    <input type="text" placeholder="Username" name="username" class="form-control">
+    <label>Email*</label>
+    <input type="email" placeholder="e-mail" name="email" class="form-control">
+    <label>First Name*</label>
+    <input type="text" placeholder="First Name" name="first_name" class="form-control">
+    <label>Last Name</label>
+    <input type="text" placeholder="Last Name" name="last_name" class="form-control">
+    <label>Password*</label>
+    <input type="password" placeholder="Username" name="password1" class="form-control">
+    <label>Password Confirm*</label>
+    <input type="password" placeholder="Username" name="password2" class="form-control">
+    <hr>
+    <button class="btn btn-primary">Register</button>
+</form>
 {% endblock %}
 

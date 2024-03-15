@@ -14,7 +14,7 @@ class LoginView(FormView):
     template_name = 'login.html'
 
     def get_success_url(self):
-        return reverse('home_page')
+        return reverse('all-shares')
 
     def post(self, request, *args, **kwargs):
         form = LoginForm(request.POST)
