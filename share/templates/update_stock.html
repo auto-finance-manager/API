@@ -31,12 +31,11 @@
   <div class="col-1">Status</div>
   <div class="col-3">action date</div>
   <div class="col-1 text-center">update</div>
-  <div class="col-1">delete</div>
+  <div class="col-1 text-center">delete</div>
 </div>
     {% for slot in slots %}
         <div class="row">
           <div class="col-1">{{ forloop.counter }}</div>
-          <div class="col-1">{{ slot.id }}</div>
           <div class="col-1">{{ slot.quantity }}</div>
           <div class="col-1">{{ slot.progres_type|upper }}</div>
         {% if slot.is_sale_cooldown %}
@@ -51,7 +50,9 @@
                 </a>
             </div>
             <div class="col-1 text-center">
+                <a class="link-danger" href="{% url 'delete-slot-share' share.code slot.id %}" onclick="confirm('You are about to delete slot information')">
                 <i class="fa-solid fa-x"></i>
+                </a>
             </div>
         </div>
     {% endfor %}

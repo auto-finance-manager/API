@@ -4,7 +4,7 @@ from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import HttpResponse
-from django.views.generic import TemplateView, FormView, DetailView, ListView, View
+from django.views.generic import TemplateView, FormView, DetailView, ListView, View, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ShareOwnershipForm, SlotsForm, UpdateShareOwnershipForm
 from .models import ShareOwnershipModel, ShareModel, SlotModel
@@ -80,6 +80,19 @@ class UpdateShareView(LoginRequiredMixin, DetailView):
                 share_owner.save()
             return HttpResponseRedirect(reverse('update-share', kwargs={'slug': slug}))
         return self.get(request, *args, **kwargs)
+
+
+class ShareDeleteSlotView(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slot = SlotModel.objects.filter(id=self.kwargs['slot_id']).first()
+        query: dict = {
+            'share__code': self.kwargs['slug'],
+            'owner': self.request.user,
+            'slots__in': [slot]
+        }
+        if ShareOwnershipModel.objects.filter(**query).exists():
+            slot.delete()
+        return reverse('update-share', kwargs={'slug': self.kwargs['slug']})
 
 
 class AllStockList(LoginRequiredMixin, ListView):
