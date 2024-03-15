@@ -45,7 +45,12 @@
           <span><i class="fa-solid fa-sun"></i></span>
           <span><i class="fa-solid fa-moon"></i></span>
         </button>
-      Login
+      {% if request.user.is_authenticated %}
+        {{ request.user.username }}
+        {% else %}
+        <a>Login</a>
+        <a>Register</a>
+        {% endif %}
     </article>
   </section>
 </header>
