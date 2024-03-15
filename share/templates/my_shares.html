@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="d-flex w-100">
+<div class="d-flex w-100 my-3">
     <div class="w-100"></div>
     <div class="">
         <a href="{% url 'add-share' %}" class="btn btn-sm btn-primary">+</a>
     </div>
 </div>
 {% for share in my_shares %}
-<div class="row border-end">
+<div class="row border-bottom">
     <div class="col-1">
         <img class="ratio ratio-1x1 share-logo" src="{{share.share.logo}}" alt="{{share.share.title}}" style="object-fit: cover">
     </div>
@@ -46,12 +46,12 @@
         {{ share.share.last_updated }}
         </p>
     </div>
-     <div class="col-1 my-auto ms-0 ">
+     <div class="col-1 my-auto ms-0 text-center ">
       <a href="{% url 'update-share' share.share.code %}">
         <i class="fa-solid fa-pen-to-square"></i>
       </a>
     </div>
-    <div class="col-1 my-auto ms-0 ">
+    <div class="col-1 my-auto ms-0 text-center">
       <a class="text-danger" href="{% url 'delete-share' share.share.code %}">
         <i class="fa-solid fa-x"></i>
       </a>
