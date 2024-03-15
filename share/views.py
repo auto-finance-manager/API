@@ -95,6 +95,18 @@ class ShareDeleteSlotView(LoginRequiredMixin, RedirectView):
         return reverse('update-share', kwargs={'slug': self.kwargs['slug']})
 
 
+class MineShareDeleteView(LoginRequiredMixin, RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        query: dict = {
+            'owner': self.request.user,
+            'share__code': self.kwargs['slug']
+        }
+        if ShareOwnershipModel.objects.filter(**query).exists():
+            ShareOwnershipModel.objects.filter(**query).delete()
+        return reverse('mine')
+
+
+
 class AllStockList(LoginRequiredMixin, ListView):
     model = ShareModel
     queryset = ShareModel.objects.all()
