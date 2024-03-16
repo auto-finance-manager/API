@@ -1,35 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <div class="d-flex">
-<div class="m-0 p-0 w-75" style="/*max-height: 80vh; overflow-y: auto*/" >
+
+<table class="m-0 p-0 w-75">
+    <thead class="text-center">
+        <tr class="">
+            <td>Logo</td>
+            <td>Code</td>
+            <td>Title</td>
+            <td class="d-flex" style="min-width: max-content">Current Price</td>
+            <td>Graphic</td>
+            <td>Last update</td>
+        </tr>
+    </thead>
+    <tbody class="text-center">
 {% for share in shares %}
-<div class="row m-0 p-0">
-    <div class="col-1">
-    {% load static %}
-<!--    <object data="{% static 'img/default.bmp' %}" type="image/png">-->
-<!--        <img class="ratio ratio-1x1 share-logo" src="{{share.logo}}" alt="{{share.title}}" style="object-fit: cover">-->
-<!--    </object>-->
-        <img class="ratio ratio-1x1 share-logo" src="{{share.logo}}" alt="{{share.title}}" style="object-fit: cover">
-    </div>
-        <div class="col-1 my-auto ms-0">
-        <p class="my-auto ms-0">{{ share.code }}</p>
-    </div>
-    <div class="col my-auto ms-0">
-        <p class="my-auto ms-0">{{ share.title }}</p>
-    </div>
-    <div class="col-1 my-auto ms-0">
-        <p class="my-auto ms-0">₺{{ share.current_price }}</p>
-    </div>
-    <div class="col-1 d-flex" >
-      <img class="ratio ratio-1x1 share-logo my-auto" src="{{share.graphic}}" alt="{{share.title}}" style="object-fit: contain">
-    </div>
-    <div class="col-1 my-auto ms-0">
-        <p class="my-auto ms-0">{{ share.last_updated }}</p>
-    </div>
-</div>
+    <tr class="">
+        <td class=" " style="height: 36px">
+            <img class="ratio ratio-1x1 share-logo" src="{{share.logo}}" alt="{{share.code}}" style="object-fit: cover">
+        </td>
+        <td class="">
+            <p class="my-auto ms-0">{{ share.code }}</p>
+        </td>
+        <td class="w-100 text-start">
+            <p class="my-auto ms-0">{{ share.title }}</p>
+        </td>
+        <td class="">
+            <p class="my-auto ms-0">₺{{ share.current_price }}</p>
+        </td>
+        <td class=" d-flex">
+            <img class="ratio ratio-1x1 share-logo my-auto" src="{{share.graphic}}" alt="{{share.title}}" style="object-fit: contain">
+        </td>
+        <td class="">
+            <p class="my-auto ms-0">{{ share.last_updated }}</p>
+        </td>
+    </tr>
 {% endfor %}
-</div>
+    </tbody>
+</table>
 <div class="m-0 p-0 w-25">
     {% for nw in news %}
         {{ nw.headline }}
