@@ -9,8 +9,8 @@ auth_patterns: list = [
 ]
 
 
-
 urlpatterns: list = [
+
 ]
 
 urlpatterns += auth_patterns

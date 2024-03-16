@@ -59,3 +59,4 @@ class LogoutView(RedirectView):
     def post(self, request, *args, **kwargs):
         logout(request)
         return HttpResponseRedirect('/')
+
