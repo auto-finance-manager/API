@@ -1,3 +1,6 @@
+import uuid
+
+from django.contrib.auth.models import User
 from django.db import models
 from datetime import timedelta, datetime
 import pytz  # Import pytz module for timezone handling
@@ -100,3 +103,9 @@ class PublicOfferingModel(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class PasswordResetModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    token = models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True)
+

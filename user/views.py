@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetConfirmView, PasswordResetDoneView
 from django.views.generic import FormView, RedirectView, TemplateView
 from django.urls import reverse
 from django.shortcuts import HttpResponseRedirect
@@ -60,3 +60,13 @@ class LogoutView(RedirectView):
         logout(request)
         return HttpResponseRedirect('/')
 
+
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'password_reset.html'
+
+    def get_success_url(self):
+        return reverse('user_login')
+
+
+class UserPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'password_reset_confirm.html'
