@@ -76,3 +76,7 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
         context.update(self.kwargs)
         return context
 
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    ...
+

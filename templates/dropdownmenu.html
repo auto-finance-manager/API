@@ -1,7 +1,9 @@
 <div class="dropdown">
     <div class="d-flex align-items-center">
         <a class="btn btn-link dropdown-toggle text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ user.username }}
+            {% if profile.profile_pic %}
+            <img src="{{profile.profile_pic.url}}" style="width: 26px; height: 26px; object-fit: cover" class="rounded rounded-circle shadow">
+            {% endif %} {{ user.username }}
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="#">Profilim</a>
