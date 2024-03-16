@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form action="{% block form_action %}/{% endblock %}" class="w-100" method="{% block form_method %}post{% endblock %}">
+
+<section class="auth-container position-absolute top-0 start-0 w-100">
+    <article class="auth-container-middle justify-content-center m-auto">
+        <div class="col-12 col-sm-8 col-md-4 col-lg-3 card p-0 m-0">
+            <div class="card-header d-flex ">
+                <strong class="fw-bold" style="font-size: 24px">
+                    {% block form_title %}Form{% endblock %}
+                </strong>
+            </div>
+        {% block form_body %}
+        {% endblock %}
+        </div>
+    </article>
+</section>
+</form>
+{% endblock %}
+

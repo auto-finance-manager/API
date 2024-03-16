@@ -3,7 +3,7 @@
 {% block title %}Login | pars{% endblock %}
 
 {% block content %}
-<section class="auth-container position-absolute top-0 start-0 w-100"  >
+<section class="auth-container position-absolute top-0 start-0 w-100">
 <article class="auth-container-middle justify-content-center m-auto">
     <div class="col-12 col-sm-8 col-md-4 col-lg-3 card p-0 m-0">
         <div class="card-header d-flex ">
@@ -21,6 +21,8 @@
             <a class="text-decoration-none" href="{% url 'password_reset' %}">Forget Password ?</a>
         </label>
 
+        <button class="btn btn-primary w-100 mt-1">Login</button>
+
         <div class="d-flex">
             <hr class="w-100">
             <p class="m-0 p-0 mx-2 my-auto">
@@ -29,7 +31,7 @@
             <hr class="w-100">
         </div>
         <div class="w-100 text-center">
-            <a class="fw-bold text-decoration-none btn btn-warning w-100">Register</a>
+            <a class="fw-bold text-decoration-none btn btn-warning w-100" href="{% url 'user_register' %}">Register</a>
             <hr class="w-50 justify-content-center mx-auto">
             <div class="d-flex mx-auto justify-content-center">
                 <button type="button" class="btn btn-light rounded-circle d-flex p-0 " style="width: 36px;height: 36px">
@@ -39,7 +41,7 @@
         </div>
         </article>
         <article class="card-footer">
-            <button class="btn btn-primary">Login</button>
+            PARS BORDER
         </article>
 
     </form>
