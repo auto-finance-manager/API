@@ -1,0 +1,15 @@
+<div class="dropdown">
+    <div class="d-flex align-items-center">
+        <a class="btn btn-link dropdown-toggle text-decoration-none" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ user.username }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Profilim</a>
+            <a class="dropdown-item" href="#">Ayarlar</a>
+            <hr>
+            <form method="post" action="{% url 'user_logout' %}" class="my-auto dropdown-item">
+                <button class="btn btn-sm btn-danger w-100" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
