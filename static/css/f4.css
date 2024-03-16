@@ -1,0 +1,106 @@
+.auth-container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+.auth-container-top, .auth-container-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.auth-container-middle{
+    flex-grow: 1;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    --d: 1px;
+    background: radial-gradient( circle at var(--d) var(--d), #000 calc(var(--d) - 1px), #0000 var(--d) ) 0 0 / 20px 20px;
+    flex-direction: column;
+    align-items: center;
+    align-self: stretch;
+}
+/*.active {*/
+/*    background-color: #FEBD2F!important;*/
+/*}*/
+/*.active::after{*/
+/*    border-left-color: #FEBD2F!important;*/
+/*}*/
+
+.shop-list article .card {
+    margin: 0.25rem;
+}
+.offer-item{
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 16px;
+}
+
+@media (min-width: 768px){
+    .shop-list article .card {
+        margin: 0.25rem;
+    }
+    .shop-filter{
+        width: 0;
+    }
+    .shop-list{
+        margin-left:0;
+    }
+
+    .product-list-container{
+        width: 100%!important;
+    }
+    .offer-item{
+        width: 42px;
+        height: 42px;
+        line-height: 42px;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 	960px){
+    .shop-list article .card {
+        margin: 0.25rem;
+    }
+    .shop-filter{
+        width: 200px;
+        max-height: 80%!important;
+    }
+    .shop-list{
+        margin-left:220px;
+    }
+
+    .product-list-container{
+        width: 100%!important;
+    }
+    .offer-item{
+        width: 62px;
+        height: 62px;
+        line-height: 62px;
+        font-size: 20px;
+    }
+}
+
+
+@media (min-width: 	1140px){
+    .shop-list article .card {
+        margin: 0.25rem;
+    }
+    .shop-filter{
+        max-height: 90%!important;
+        width: 300px;
+    }
+    .shop-list{
+        margin-left:350px;
+    }
+    .product-list-container{
+        width: 80%!important;
+    }
+    .offer-item{
+        width: 52px;
+        height: 52px;
+        line-height: 52px;
+        font-size: 16px;
+    }
+}
