@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 
-urlpatterns: list = [
+urlpatterns: list[path] = [
     path('share/', include('share.api.urls'))
 ]
 

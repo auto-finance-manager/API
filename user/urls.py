@@ -12,7 +12,7 @@ auth_patterns: list = [
 
 
 urlpatterns: list = [
-    path('profile/', views.ProfileView.as_view(), name='profile')
+    path('profile/', views.ProfileUpdateView.as_view(), name='profile')
 ]
 
 urlpatterns += auth_patterns

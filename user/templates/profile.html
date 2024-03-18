@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+<style>
+    .profile-nav-item.active {
+        background-color: var(--bs-primary);
+        color: var(--bs-light);
+    }
+</style>
+{% endblock%}
+
+{% block content %}
+<section class="d-flex w-100 "  >
+<article class="row w-100">
+    <aside class="col-12 col-md-4 col-lg-3 pt-2">
+        <a class="text-decoration-none btn btn-light border-bottom w-100 text-start profile-nav-item" onclick="toggle_local_active_nav(this)" href="#profile">Profile</a>
+        <a class="text-decoration-none btn btn-light border-bottom w-100 text-start profile-nav-item" onclick="toggle_local_active_nav(this)" href="#profile">Profile</a>
+        <a class="text-decoration-none btn btn-light border-bottom w-100 text-start profile-nav-item" onclick="toggle_local_active_nav(this)" href="#profile">Profile</a>
+    </aside>
+    <div class="col border-start">
+        <div id="profile" class="col-12 col-md-6">
+            <img
+                width="250"
+                height="250"
+                src="{{ profile.profile_pic.url }}"
+                class="rounded rounded-circle"
+                id="profile_pic"
+                style="object-fit:contain;cursor:pointer;background-color: var(--bs-secondary-bg);"
+                onclick="document.getElementById('profile_pic_input').click()"
+            >
+            <input type="file" name="file" id="profile_pic_input" accept="image/*" style="display:none">
+        </div>
+    </div>
+</article>
+</section>
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+
+function toggle_local_active_nav(self){
+    const profile_nav_items = document.getElementsByClassName('profile-nav-item');
+    for (let i = 0; i < profile_nav_items.length; i++){
+        profile_nav_items[i].classList.remove('active');
+    }
+    self.classList.add('active');
+}
+
+// File input alanını dinle
+document.getElementById('profile_pic_input').addEventListener('change', function() {
+    var file = this.files[0]; // Seçilen dosyayı al
+
+    if (file) {
+        var reader = new FileReader(); // Dosyayı okuyucuya ekle
+
+        reader.onload = function(e) {
+            // Okunan dosyayı image elementinin src özelliğine ata
+            document.getElementById('profile_pic').src = e.target.result;
+        };
+
+        reader.readAsDataURL(file); // Dosyayı oku
+    }
+});
+</script>
+{% endblock%}

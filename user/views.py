@@ -77,6 +77,7 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
         return context
 
 
-class ProfileView(LoginRequiredMixin, TemplateView):
-    ...
+class ProfileUpdateView(LoginRequiredMixin, TemplateView):
+    template_name = 'profile.html'
+
 
