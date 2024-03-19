@@ -45,7 +45,8 @@ INSTALLED_APPS = [
 ]+[
     # your apps
     'share',
-    'user'
+    'user',
+    'notification'
 ]+[
     # third party app
     'rest_framework',
