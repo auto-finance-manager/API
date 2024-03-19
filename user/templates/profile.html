@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block styles %}
 <style>
     .profile-nav-item.active {
@@ -18,18 +18,43 @@
         <a class="text-decoration-none btn btn-light border-bottom w-100 text-start profile-nav-item" onclick="toggle_local_active_nav(this)" href="#profile">Profile</a>
     </aside>
     <div class="col border-start">
-        <div id="profile" class="col-12 col-md-6">
+        <form id="profile" class="row">
+            <div  class="col-12 col-md-6 d-flex">
             <img
                 width="250"
                 height="250"
                 src="{{ profile.profile_pic.url }}"
-                class="rounded rounded-circle"
+                class="rounded rounded-circle justify-content-center m-auto"
                 id="profile_pic"
                 style="object-fit:contain;cursor:pointer;background-color: var(--bs-secondary-bg);"
                 onclick="document.getElementById('profile_pic_input').click()"
+                alt="user profile picture"
             >
             <input type="file" name="file" id="profile_pic_input" accept="image/*" style="display:none">
         </div>
+            <div class="col-12 col-md-6 pt-2 m-auto">
+                <div class="mb-3 form-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Username" value="{{ request.user.username }}" name="username" class="form-control disabled" disabled>
+                </div>
+                <div class="d-flex">
+                    <div class="mb-3 me-1 form-group w-50">
+                        <label>Name</label>
+                        <input type="text" placeholder="Name" value="{{ request.user.name }}" name="name" class="form-control" >
+                    </div>
+                    <div class="mb-3 ms-1 form-group w-50">
+                        <label>Surname</label>
+                        <input type="text" placeholder="Surname" value="{{ request.user.name }}" name="surname" class="form-control" >
+                    </div>
+                </div>
+                <div class="mb-3 form-group">
+                    <label>Surname</label>
+                    <input type="email" placeholder="e-mail" value="{{ request.user.name }}" name="surname" class="form-control" >
+                </div>
+            </div>
+        </form>
+        <hr>
+        <
     </div>
 </article>
 </section>
